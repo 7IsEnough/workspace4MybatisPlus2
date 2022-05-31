@@ -26,13 +26,24 @@ class MybatisPlusApplicationTests {
   @Test
   public void testInsert() {
     User user = new User();
-    user.setName("明凯").setAge(3).setEmail("234234@qq.com").setId(6L);
+    user.setName("明凯").setAge(3).setEmail("234234@qq.com");
     // 帮我们自动生成id
     // result 受影响的行数
     int result = userMapper.insert(user);
     System.out.println(result);
     // id 会自动回填
     System.out.println(user);
+  }
+
+  // 测试更新
+  @Test
+  public void testUpdate() {
+    User user = new User();
+    // 通过条件自动拼接sql
+    user.setName("简自豪").setId(1529471335606878212L).setAge(21);
+    // 注意：updateById 但是参数是一个对象
+    int i = userMapper.updateById(user);
+    System.out.println(i);
   }
   
 
