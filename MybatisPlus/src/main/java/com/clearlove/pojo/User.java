@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.Version;
 import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,10 @@ public class User {
   private Integer age;
 
   private String email;
+
+  // 乐观锁version注解
+  @Version
+  private Integer version;
 
   // 字段添加填充内容
   @TableField(fill = FieldFill.INSERT)
