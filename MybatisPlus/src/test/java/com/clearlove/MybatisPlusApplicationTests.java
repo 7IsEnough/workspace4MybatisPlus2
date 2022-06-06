@@ -1,8 +1,12 @@
 package com.clearlove;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.clearlove.mapper.UserMapper;
 import com.clearlove.pojo.User;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -75,6 +79,64 @@ class MybatisPlusApplicationTests {
     // 如果没有乐观锁就会覆盖插队线程的值
     // 自旋锁来多次尝试提交
     userMapper.updateById(user);
+  }
+
+  // 测试查询
+  @Test
+  public void testSelectById() {
+    User user = userMapper.selectById(1L);
+    System.out.println(user);
+  }
+
+
+  // 测试批量查询
+  @Test
+  public void testSelectByBatchId() {
+    List<User> users = userMapper.selectBatchIds(Arrays.asList(1, 2, 3));
+    users.forEach(System.out::println);
+  }
+
+  // 条件查询其中之一map
+  @Test
+  public void testSelectByBatchIds() {
+    HashMap<String, Object> map = new HashMap<>();
+    // 自定义查询
+    map.put("name", "明凯");
+    map.put("age", 3);
+    List<User> users = userMapper.selectByMap(map);
+    users.forEach(System.out::println);
+  }
+
+  // 测试分页查询
+  @Test
+  public void testPage() {
+    // 参数一：当前页
+    // 参数二：页面大小
+    Page<User> page = new Page<>(1, 5);
+    userMapper.selectPage(page, null);
+    page.getRecords().forEach(System.out::println);
+    System.out.println(page.getTotal());
+  }
+
+  // 测试删除
+  @Test
+  public void testDeleteById() {
+    userMapper.deleteById(1529471335606878211L);
+  }
+
+  // 通过id批量删除
+  @Test
+  public void testDeleteBatchId() {
+    userMapper.deleteBatchIds(Arrays.asList(1529471335606878210L,1529471335606878212L));
+  }
+
+
+  // 通过map删除
+  @Test
+  public void testDeleteByMap() {
+    HashMap<String, Object> map = new HashMap<>();
+    map.put("name", "uzi222");
+    userMapper.deleteByMap(map);
   }
   
 
