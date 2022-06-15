@@ -84,7 +84,7 @@ class MybatisPlusApplicationTests {
   // 测试查询
   @Test
   public void testSelectById() {
-    User user = userMapper.selectById(1L);
+    User user = userMapper.selectById(2L);
     System.out.println(user);
   }
 
@@ -121,7 +121,7 @@ class MybatisPlusApplicationTests {
   // 测试删除
   @Test
   public void testDeleteById() {
-    userMapper.deleteById(1529471335606878211L);
+    userMapper.deleteById(2L);
   }
 
   // 通过id批量删除
